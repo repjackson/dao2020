@@ -44,7 +44,7 @@ template(name='home')
             i.big.loading.yin.yang.grey.icon
     else
         .ui.padded.grid
-            .sixteen.wide.top.aligned.column
+            .sixteen.wide.center.aligned.column
                 // unless current_post
                 // img.ui.inline.tiny.image.pointer.zoomer.add_post(src="https://cdn.shopify.com/s/files/1/2432/4293/files/bcplogocirclestyle-2092x2107_1024x1024.png?v=1507416868")
                 // .ui.inline.header
@@ -79,7 +79,7 @@ template(name='home')
                 i.yin.yang.big.link.grey.icon.add_post
                         
 template(name='unpick_tag')                        
-    a.ui.black.big.image.label.unpick_tag
+    a.ui.black.massive.image.label.unpick_tag
         with ref_doc_flat
             if image_url
                 +image_link_view key='image_url'
@@ -92,12 +92,13 @@ template(name='unpick_tag')
                         
 template(name='tag_picker')
     // if title
-    a.ui.big.link.image.basic.label.pick_tag(title=count)
+    a.ui.massive.link.image.label.pick_tag.zoomer(title=count)
         with ref_doc
-            if image_url
-                +image_link_view key='image_url' direct=true
-            else if image_id
-                +image_view key='image_id' direct=true
+            span.zoomer
+                if image_url
+                    +image_link_view key='image_url' direct=true
+                else if image_id
+                    +image_view key='image_id' direct=true
         // else
         |#{title} 
         // 
@@ -171,7 +172,7 @@ template(name='home_item')
                 
 
 template(name='flat_tag_picker')
-    .ui.image.link.basic.circular.label.flat_tag_pick.zoomer.pointer
+    .ui.image.link.basic.circular.big.label.flat_tag_pick.zoomer.pointer
         with ref_doc_flat
             if image_url
                 +image_link_view key='image_url' direct=true
