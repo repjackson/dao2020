@@ -58,11 +58,11 @@ Template.home_item.events
     'click .save_post': -> Session.get('viewing_post_id', @_id)
 
 Template.tag_picker.onCreated ->
-    # @autorun => @subscribe 'ref_doc', @data, ->
+    @autorun => @subscribe 'ref_doc', @data, ->
 Template.unpick_tag.onCreated ->
     @autorun => @subscribe 'flat_ref_doc', @data, ->
-# Template.flat_tag_picker.onCreated ->
-#     @autorun => @subscribe 'flat_ref_doc', @data, ->
+Template.flat_tag_picker.onCreated ->
+    @autorun => @subscribe 'flat_ref_doc', @data, ->
 Template.home.onCreated ->
     @autorun => @subscribe('doc_by_id',Session.get('viewing_post_id'))
     @autorun => @subscribe 'post_docs',
