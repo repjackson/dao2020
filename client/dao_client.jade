@@ -60,7 +60,7 @@ template(name='home')
                 .ui.hidden.divider
                 unless subs_ready
                     .ui.center.aligned.basic.segment
-                        i.massive.grey.yin.yang.loading.icon
+                        // i.massive.grey.yin.yang.loading.icon
                 else 
                     if current_post
                         with current_post
@@ -76,7 +76,7 @@ template(name='home')
                     //     .ui.stackable.two.centered.cards.scrollin
                     //         each home_items
                     //             +home_item
-                i.yin.yang.big.link.grey.icon.add_post
+                    i.yin.yang.big.link.grey.icon.add_post
                         
 template(name='unpick_tag')                        
     a.ui.black.massive.image.label.unpick_tag
@@ -92,7 +92,7 @@ template(name='unpick_tag')
                         
 template(name='tag_picker')
     // if title
-    a.ui.massive.link.image.label.pick_tag.zoomer(title=count)
+    a.ui.massive.link.image.basic.label.pick_tag.zoomer(title=count)
         with ref_doc
             span.zoomer
                 if image_url
