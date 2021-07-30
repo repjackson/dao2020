@@ -45,7 +45,6 @@ template(name='home')
     else
         .ui.padded.grid
             .sixteen.wide.top.aligned.column
-                i.yin.yang.big.grey.icon.add_post
                 // unless current_post
                 // img.ui.inline.tiny.image.pointer.zoomer.add_post(src="https://cdn.shopify.com/s/files/1/2432/4293/files/bcplogocirclestyle-2092x2107_1024x1024.png?v=1507416868")
                 // .ui.inline.header
@@ -75,9 +74,10 @@ template(name='home')
                             each home_items
                                 +home_item
                     else 
-                        .ui.stackable.three.centered.cards.scrollin
+                        .ui.stackable.two.centered.cards.scrollin
                             each home_items
                                 +home_item
+                i.yin.yang.big.link.grey.icon.add_post
                         
 template(name='unpick_tag')                        
     a.ui.black.big.image.circular.label.unpick_tag
