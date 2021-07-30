@@ -91,7 +91,6 @@ Template.home.helpers
         # console.log 'count', count
         count is 1
         
-Template.home_item.helpers
     one_doc: ->
         count = 
             Docs.find(
@@ -101,7 +100,7 @@ Template.home_item.helpers
             ).count()
         # console.log 'count', count
         count is 1
-    two_doc: ->
+    two_docs: ->
         count = 
             Docs.find(
                 model:'post'

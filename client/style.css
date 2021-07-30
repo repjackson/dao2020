@@ -103,17 +103,6 @@ body {
 /*	padding-top: 1em;*/
 /*	padding-left: 1em;*/
 /*}*/
-.smallscroll{
-	overflow-y:scroll;
-	overflow-x:hidden;
-	max-height:500px;
-	padding-top: 1em;
-	padding-left: 1em;
-}
-
-.smallscroll::-webkit-scrollbar {
-    width: 1px;
-}
 .scrolling::-webkit-scrollbar {
     width: 0px !important;
 }
@@ -1037,7 +1026,7 @@ input.username_search{
 .smallscroll{
 	overflow-y:scroll;
 	overflow-x:hidden;
-	max-height:250px;
+	max-height:500px;
 	/*max-height:85vh;*/
 	padding-top: 1em;
 	/*padding-left: 1em;*/
