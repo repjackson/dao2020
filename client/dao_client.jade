@@ -66,21 +66,20 @@ template(name='home')
                         with current_post
                             +home_item
                     else if one_doc
-                        .ui.fluid.cards.scrollin
-                            each home_items
-                                +home_item
-                    else if two_docs
-                        .ui.stackable.two.cards.scrollin
-                            each home_items
-                                +home_item
-                    else 
-                        .ui.stackable.two.centered.cards.scrollin
-                            each home_items
-                                +home_item
+                        each home_items
+                            +home_item
+                    // else if two_docs
+                    //     .ui.stackable.two.cards.scrollin
+                    //         each home_items
+                    //             +home_item
+                    // else 
+                    //     .ui.stackable.two.centered.cards.scrollin
+                    //         each home_items
+                    //             +home_item
                 i.yin.yang.big.link.grey.icon.add_post
                         
 template(name='unpick_tag')                        
-    a.ui.black.big.image.circular.label.unpick_tag
+    a.ui.black.big.image.label.unpick_tag
         with ref_doc_flat
             if image_url
                 +image_link_view key='image_url'
@@ -93,7 +92,7 @@ template(name='unpick_tag')
                         
 template(name='tag_picker')
     // if title
-    a.ui.big.link.image.basic.circular.label.pick_tag(title=count)
+    a.ui.big.link.image.basic.label.pick_tag(title=count)
         with ref_doc
             if image_url
                 +image_link_view key='image_url' direct=true
@@ -117,7 +116,7 @@ template(name='home_item')
     //             +boolean_edit key='archived' label='archived' icon='archive' direct=true
     // else
     // .ui.fluid.card(class=card_class)
-    .ui.fluid.card.smallscroll
+    .ui.fluid.item.smallsroll
         span
             if image_url
                 +image_link_view key='image_url' direct=true
