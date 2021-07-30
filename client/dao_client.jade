@@ -1,5 +1,5 @@
 head
-    title Backcountry
+    title dao
     meta(name='viewport', content='user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width')
     meta(name='apple-mobile-web-app-capable', content='yes')
     meta(name='apple-mobile-web-app-status-bar-style', content='black')
@@ -41,12 +41,14 @@ body
 template(name='home')
     if logging_in
         .ui.center.aligned.basic.segment
-            i.huge.loading.food.grey.icon
+            i.big.loading.food.grey.icon
     else
         .ui.padded.stackable.grid
             .sixteen.wide.column
                 // unless current_post
-                img.ui.inline.tiny.image.pointer.zoomer.add_post(src="https://cdn.shopify.com/s/files/1/2432/4293/files/bcplogocirclestyle-2092x2107_1024x1024.png?v=1507416868")
+                // img.ui.inline.tiny.image.pointer.zoomer.add_post(src="https://cdn.shopify.com/s/files/1/2432/4293/files/bcplogocirclestyle-2092x2107_1024x1024.png?v=1507416868")
+                .ui.inline.header
+                    i.big.yin.yang.grey.link.icon.add_post
                 // unless subs_ready
                 //     .ui.center.aligned.basic.segment
                 //         i.massive.grey.food.loading.icon
@@ -78,7 +80,7 @@ template(name='home')
                                 +home_item
                         
 template(name='unpick_tag')                        
-    a.ui.black.huge.image.circular.label.zoomer.unpick_tag
+    a.ui.black.big.image.circular.label.unpick_tag
         with ref_doc_flat
             if image_url
                 +image_link_view key='image_url'
@@ -91,7 +93,7 @@ template(name='unpick_tag')
                         
 template(name='tag_picker')
     // if title
-    a.ui.huge.link.image.basic.circular.label.pick_tag.zoomer(title=count)
+    a.ui.big.link.image.basic.circular.label.pick_tag(title=count)
         with ref_doc
             if image_url
                 +image_link_view key='image_url' direct=true

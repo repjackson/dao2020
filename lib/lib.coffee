@@ -23,7 +23,7 @@ Docs.before.insert (userId, doc)->
         # console.log date_array
         doc._timestamp_tags = date_array
 
-    doc.app = 'bc'
+    doc.app = 'dao'
     # doc.points = 0
     # doc.downvoters = []
     # doc.upvoters = []

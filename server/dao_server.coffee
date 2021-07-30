@@ -37,7 +37,7 @@ Meteor.publish 'post_facets', (
     )->
     self = @
     # match = {}
-    match = {app:'bc'}
+    match = {app:'dao'}
     match.model = 'post'
     if picked_tags.length > 0 then match.tags = $all:picked_tags 
 
@@ -56,7 +56,7 @@ Meteor.publish 'post_facets', (
         { $match: count: $lt: result_count }
         # { $match: _id: {$regex:"#{product_query}", $options: 'i'} }
         { $sort: count: -1, _id: 1 }
-        { $limit: 11 }
+        { $limit: 10 }
         { $project: _id: 0, title: '$_id', count: 1 }
     ], {
         allowDiskUse: true
@@ -79,25 +79,25 @@ Meteor.publish 'post_facets', (
 #             model:'wikipedia'
 #             title:$in:picked_tags
 Meteor.publish 'ref_doc', (tag)->
-    match = {app:'bc'}
+    match = {app:'dao'}
     match.model = 'post'
     match.title = tag.title
     found = 
         Docs.findOne match
     if found
         Docs.find match
-    else 
-        match.title = null
-        match.tags = $in:[tag.title]
-        Docs.find match,
-            sort:views:1
+    # else 
+    #     match.title = null
+    #     match.tags = $in:[tag.title]
+    #     Docs.find match,
+    #         sort:views:1
             
 Meteor.publish 'flat_ref_doc', (title)->
     # console.log title
     if title
         Docs.find({
             model:'post'
-            app:'bc'
+            app:'dao'
             title:title
         }, 
             fields:
@@ -109,15 +109,15 @@ Meteor.publish 'flat_ref_doc', (title)->
                 image_url:1
             limit:1
         )
-    else 
-        Docs.find {
-            model:'post'
-            tags:$in:[title]
-            app:'bc'
-        },
-            sort:
-                views:1
-            limit:1
+    # else 
+    #     Docs.find {
+    #         model:'post'
+    #         tags:$in:[title]
+    #         app:'dao'
+    #     },
+    #         sort:
+    #             views:1
+    #         limit:1
             
             
 Meteor.publish 'post_docs', (
@@ -127,7 +127,7 @@ Meteor.publish 'post_docs', (
 
     self = @
     # match = {}
-    match = {app:'bc'}
+    match = {app:'dao'}
     match.model = 'post'
     # match.group_id = Meteor.user().current_group_id
     if title_filter and title_filter.length > 1

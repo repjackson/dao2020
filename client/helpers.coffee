@@ -255,7 +255,7 @@ Template.registerHelper 'model_docs_helper', (model) ->
     # console.log model
     Docs.find 
         model:model
-        app:'bc'
+        app:'dao'
         # group_id = Meteor.user().current_group_id
         
 Template.registerHelper 'subs_ready', () -> 
