@@ -1,0 +1,178 @@
+head
+    title Backcountry
+    meta(name='viewport', content='user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    meta(name="msapplication-TileColor" content="#000000")
+    meta(name="theme-color" content="#000000")
+    link(rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.css')
+    link(href="https://fonts.googleapis.com/css?family=Ubuntu:300,400&display=swap" rel="stylesheet")
+    link(rel="preconnect" href="https://fonts.gstatic.com")
+    link(href="https://fonts.googleapis.com/css2?family=Benne&display=swap" rel="stylesheet")
+    link(rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png")
+    link(rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png")
+    link(rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png")
+    link(rel="manifest" href="/site.webmanifest")
+    link(rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000")
+    link(href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet")
+
+    script(src='https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js')
+    
+    // script(src="https://cdn.jsdelivr.net/npm/sweetalert2@9")
+    script(src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js")
+    script(src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/en.js")
+
+    // script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.js")
+    //- script(async='', src='https://www.googletagmanager.com/gtag/js?id=UA-140259454-1')
+    script.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-GLYPPRGJFQ');
+
+    
+body
+    +home
+                
+
+        
+template(name='home')
+    if logging_in
+        .ui.center.aligned.basic.segment
+            i.huge.loading.food.grey.icon
+    else
+        .ui.padded.stackable.grid
+            .sixteen.wide.column
+                // unless current_post
+                img.ui.inline.tiny.image.pointer.zoomer.add_post(src="https://cdn.shopify.com/s/files/1/2432/4293/files/bcplogocirclestyle-2092x2107_1024x1024.png?v=1507416868")
+                // unless subs_ready
+                //     .ui.center.aligned.basic.segment
+                //         i.massive.grey.food.loading.icon
+                each picked_tags
+                    +unpick_tag
+                if subs_ready
+                    if tag_results
+                        each tag_results
+                            +tag_picker
+                .ui.hidden.divider
+                unless subs_ready
+                    .ui.center.aligned.basic.segment
+                        i.massive.grey.food.loading.icon
+                else 
+                    if current_post
+                        with current_post
+                            +home_item
+                    else if one_doc
+                        .ui.fluid.cards.scrollin
+                            each home_items
+                                +home_item
+                    else if two_docs
+                        .ui.stackable.two.cards.scrollin
+                            each home_items
+                                +home_item
+                    else 
+                        .ui.stackable.four.centered.cards.scrollin
+                            each home_items
+                                +home_item
+                        
+template(name='unpick_tag')                        
+    a.ui.black.huge.image.circular.label.zoomer.unpick_tag
+        with ref_doc_flat
+            if image_url
+                +image_link_view key='image_url'
+            else if image_id
+                +image_view key='image_id'
+        
+            // img.ui.image(src="{{c.url image_id width=500 height=500 gravity='face' crop='fill'}}")
+        |#{this}
+                        
+                        
+template(name='tag_picker')
+    // if title
+    a.ui.huge.link.image.basic.circular.label.pick_tag.zoomer(title=count)
+        with ref_doc
+            if image_url
+                +image_link_view key='image_url' direct=true
+            else if image_id
+                +image_view key='image_id' direct=true
+        // else
+        |#{title} 
+        // 
+            // img.ui.image(src="{{c.url image_id width=500 height=500 gravity='face' crop='fill'}}")
+            // img(src=metadata.image)
+        // small.ui.grey.text #{count}
+
+
+
+template(name='home_item')
+    // if session_is 'editing_chat' _id
+    //     .ui.item
+    //         .content
+    //             +text_edit key='title' direct=true
+    //             i.checkmark.large.link.green.icon.save_chat   
+    //             +boolean_edit key='archived' label='archived' icon='archive' direct=true
+    // else
+    // .ui.fluid.card(class=card_class)
+    .ui.fluid.card
+        span.clear_current_post
+            if image_url
+                +image_link_view key='image_url' direct=true
+            else if image_id
+                +image_view key='image_id' direct=true 
+            else if youtube_id
+                +youtube_view key='image_id' direct=true
+            // if is_selected
+            //     .ui.header this one
+            // if unless
+            // else
+            //     img.ui.image(src="{{c.url image_id width=500 height=500 gravity='face' crop='fill'}}")
+        .content
+            // a.ui.header.zoomer.fly_right(href="/post/#{_id}") !{title}
+            a.ui.inline.header.zoomer.clear_current_post !{title}
+            
+            // .metadata
+            //     |#{when}
+            //     small {{long_date _timestamp}}
+            .text.zoomer.clear_current_post
+                |!{body}
+            each tags
+                +flat_tag_picker
+                // .ui.button 
+                //     |#{this}
+            a.ui.icon.large.basic.button.edit_this
+                i.pencil.large.icon
+    // with current_doc
+    if is_editing
+        .ui.stackable.padded.grid
+            .row
+                .eight.wide.column
+                    .ui.inline.header
+                        i.pencil.icon
+                        | #{title}
+                    // a.ui.large.icon.green.button(href="/post/#{_id}/" title='save product')
+                    a.ui.big.circular.icon.green.button.save_this(title='save')
+                        i.checkmark.big.icon
+                    +text_edit key='title' label='title' direct=true
+                    +array_edit key='tags' label='tags' icon='tags' direct=true
+                    +image_link_edit key='image_url' label='image link' icon='image'
+                    +image_edit key='image_id' label='image' icon='image'
+                    +number_edit key='price_dollars' label='price ($)' icon='money'
+                .eight.wide.column
+                    +html_edit key='body' label='body' direct=true
+                    // .ui.red.large.icon.button.delete_post(title='delete')
+                    //     i.remove.icon   
+                    //     // | delete
+                
+                
+
+template(name='flat_tag_picker')
+    .ui.big.image.link.basic.circular.label.flat_tag_pick.zoomer.pointer
+        with ref_doc_flat
+            if image_url
+                +image_link_view key='image_url' direct=true
+            else if image_id
+                +image_view key='image_id' direct=true
+        // img.ui.image(src="{{c.url ref_doc_flat.image_id width=200 height=200 gravity='face' crop='fill'}}")
+        |#{this}
