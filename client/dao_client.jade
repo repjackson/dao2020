@@ -41,7 +41,7 @@ body
 template(name='home')
     if logging_in
         .ui.center.aligned.basic.segment
-            i.big.loading.food.grey.icon
+            i.big.loading.yin.yang.grey.icon
     else
         .ui.padded.stackable.grid
             .sixteen.wide.column
@@ -51,7 +51,7 @@ template(name='home')
                     i.big.yin.yang.grey.link.icon.add_post
                 // unless subs_ready
                 //     .ui.center.aligned.basic.segment
-                //         i.massive.grey.food.loading.icon
+                //         i.massive.grey.yin.yang.loading.icon
                 each picked_tags
                     +unpick_tag
                 if subs_ready
@@ -61,7 +61,7 @@ template(name='home')
                 .ui.hidden.divider
                 unless subs_ready
                     .ui.center.aligned.basic.segment
-                        i.massive.grey.food.loading.icon
+                        i.massive.grey.yin.yang.loading.icon
                 else 
                     if current_post
                         with current_post
@@ -117,13 +117,13 @@ template(name='home_item')
     //             +boolean_edit key='archived' label='archived' icon='archive' direct=true
     // else
     // .ui.fluid.card(class=card_class)
-    .ui.fluid.card
-        span.clear_current_post
+    .ui.fluid.card.smallscroll
+        span
             if image_url
                 +image_link_view key='image_url' direct=true
             else if image_id
                 +image_view key='image_id' direct=true 
-            else if youtube_id
+            if youtube_id
                 +youtube_view key='image_id' direct=true
             // if is_selected
             //     .ui.header this one
@@ -139,12 +139,14 @@ template(name='home_item')
             //     small {{long_date _timestamp}}
             .text.zoomer.clear_current_post
                 |!{body}
+                |!{content}
             each tags
                 +flat_tag_picker
                 // .ui.button 
                 //     |#{this}
-            a.ui.icon.large.basic.button.edit_this
-                i.pencil.large.icon
+            if in_dev
+                a.ui.icon.large.basic.button.edit_this
+                    i.pencil.large.icon
     // with current_doc
     if is_editing
         .ui.stackable.padded.grid
@@ -160,7 +162,6 @@ template(name='home_item')
                     +array_edit key='tags' label='tags' icon='tags' direct=true
                     +image_link_edit key='image_url' label='image link' icon='image'
                     +image_edit key='image_id' label='image' icon='image'
-                    +number_edit key='price_dollars' label='price ($)' icon='money'
                 .eight.wide.column
                     +html_edit key='body' label='body' direct=true
                     // .ui.red.large.icon.button.delete_post(title='delete')
@@ -170,7 +171,7 @@ template(name='home_item')
                 
 
 template(name='flat_tag_picker')
-    .ui.big.image.link.basic.circular.label.flat_tag_pick.zoomer.pointer
+    .ui.image.link.basic.circular.label.flat_tag_pick.zoomer.pointer
         with ref_doc_flat
             if image_url
                 +image_link_view key='image_url' direct=true

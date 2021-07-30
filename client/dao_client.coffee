@@ -58,11 +58,11 @@ Template.home_item.events
     'click .save_post': -> Session.get('viewing_post_id', @_id)
 
 Template.tag_picker.onCreated ->
-    @autorun => @subscribe 'ref_doc', @data, ->
+    # @autorun => @subscribe 'ref_doc', @data, ->
 Template.unpick_tag.onCreated ->
     @autorun => @subscribe 'flat_ref_doc', @data, ->
-Template.flat_tag_picker.onCreated ->
-    @autorun => @subscribe 'flat_ref_doc', @data, ->
+# Template.flat_tag_picker.onCreated ->
+#     @autorun => @subscribe 'flat_ref_doc', @data, ->
 Template.home.onCreated ->
     @autorun => @subscribe('doc_by_id',Session.get('viewing_post_id'))
     @autorun => @subscribe 'post_docs',
@@ -123,14 +123,15 @@ Template.flat_tag_picker.helpers
         # console.log @valueOf()
         found = Docs.findOne 
             model:'post'
+            app:'dao'
             title:@valueOf()
         if found 
             found
-        else 
-            Docs.findOne
-                model:'post'
-                tags:$in:[@valueOf()]
-                app:'dao'
+        # else 
+        #     Docs.findOne
+        #         model:'post'
+        #         tags:$in:[@valueOf()]
+        #         app:'dao'
 
 Template.tag_picker.helpers
     ref_doc: ->
@@ -196,7 +197,7 @@ Template.home.helpers
         match.tags = $in:picked_tags.array()
         Docs.find match,
             sort:views:-1
-       
+            limit:10
 Template.unpick_tag.helpers
     ref_doc_flat: ->
         # console.log @

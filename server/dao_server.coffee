@@ -56,7 +56,7 @@ Meteor.publish 'post_facets', (
         { $match: count: $lt: result_count }
         # { $match: _id: {$regex:"#{product_query}", $options: 'i'} }
         { $sort: count: -1, _id: 1 }
-        { $limit: 10 }
+        { $limit: 20 }
         { $project: _id: 0, title: '$_id', count: 1 }
     ], {
         allowDiskUse: true
@@ -82,15 +82,20 @@ Meteor.publish 'ref_doc', (tag)->
     match = {app:'dao'}
     match.model = 'post'
     match.title = tag.title
+    match.image_id = $exists:true
+    
+    
     found = 
         Docs.findOne match
     if found
-        Docs.find match
-    # else 
-    #     match.title = null
-    #     match.tags = $in:[tag.title]
-    #     Docs.find match,
-    #         sort:views:1
+        Docs.find match,
+            limit:1
+    else 
+        match.title = null
+        match.tags = $in:[tag.title]
+        Docs.find match,
+            sort:views:1
+            limit:1
             
 Meteor.publish 'flat_ref_doc', (title)->
     # console.log title
@@ -109,15 +114,15 @@ Meteor.publish 'flat_ref_doc', (title)->
                 image_url:1
             limit:1
         )
-    # else 
-    #     Docs.find {
-    #         model:'post'
-    #         tags:$in:[title]
-    #         app:'dao'
-    #     },
-    #         sort:
-    #             views:1
-    #         limit:1
+    else 
+        Docs.find {
+            model:'post'
+            tags:$in:[title]
+            app:'dao'
+        },
+            sort:
+                views:1
+            limit:1
             
             
 Meteor.publish 'post_docs', (
@@ -137,13 +142,13 @@ Meteor.publish 'post_docs', (
     if picked_tags.length > 0 then match.tags = $all:picked_tags 
     Docs.find match, 
         limit:10
-        fields:
-            title:1
-            model:1
-            tags:1
-            app:1
-            image_id:1
-            image_url:1
-            body:1
+        # fields:
+        #     title:1
+        #     model:1
+        #     tags:1
+        #     app:1
+        #     image_id:1
+        #     image_url:1
+        #     body:1
         sort:
             views:-1
