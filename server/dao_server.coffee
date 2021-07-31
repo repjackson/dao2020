@@ -102,7 +102,7 @@ Meteor.publish 'flat_ref_doc', (title)->
     if title
         Docs.find({
             model:'post'
-            app:'dao'
+            # app:'dao'
             title:title
         }, 
             fields:
@@ -118,7 +118,7 @@ Meteor.publish 'flat_ref_doc', (title)->
         Docs.find {
             model:'post'
             tags:$in:[title]
-            app:'dao'
+            # app:'dao'
         },
             sort:
                 views:1

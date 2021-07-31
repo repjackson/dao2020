@@ -84,8 +84,8 @@ Template.home.helpers
     one_doc: ->
         count = 
             Docs.find(
-                model:'post'
-                app:'dao'
+                # model:'post'
+                # app:'dao'
                 tags:$in:picked_tags.array()
             ).count()
         # console.log 'count', count
@@ -94,8 +94,8 @@ Template.home.helpers
     one_doc: ->
         count = 
             Docs.find(
-                model:'post'
-                app:'dao'
+                # model:'post'
+                # app:'dao'
                 tags:$in:picked_tags.array()
             ).count()
         # console.log 'count', count
@@ -103,8 +103,8 @@ Template.home.helpers
     two_docs: ->
         count = 
             Docs.find(
-                model:'post'
-                app:'dao'
+                # model:'post'
+                # app:'dao'
                 tags:$in:picked_tags.array()
             ).count()
         # console.log 'count', count
@@ -121,8 +121,8 @@ Template.flat_tag_picker.helpers
     ref_doc_flat: ->
         # console.log @valueOf()
         found = Docs.findOne 
-            model:'post'
-            app:'dao'
+            # model:'post'
+            # app:'dao'
             title:@valueOf()
         if found 
             found
@@ -137,15 +137,15 @@ Template.tag_picker.helpers
         # console.log @valueOf()
         found = 
             Docs.findOne 
-                model:'post'
+                # model:'post'
                 title:@title
         if found 
             found
         else 
             Docs.findOne
-                model:'post'
+                # model:'post'
                 tags:$in:[@title]
-                app:'dao'
+                # app:'dao'
 
 Template.home.helpers        
     picked_tags: -> picked_tags.array()
@@ -155,7 +155,7 @@ Template.home.helpers
     #         model:'post'
     tag_results: ->
         doc_count = Docs.find({
-            model:'post'
+            # model:'post'
             tags:$all:picked_tags.array()
             }).count()
         # console.log 'count', doc_count
@@ -172,16 +172,16 @@ Template.home.helpers
     ref_doc_flat: ->
         found = 
             Docs.findOne 
-                model:'post'
-                app:'dao'
+                # model:'post'
+                # app:'dao'
                 title:@valueOf()
         if found 
             found
         else 
             Docs.findOne
-                model:'post'
+                # model:'post'
                 tags:$in:[@valueOf()]
-                app:'dao'
+                # app:'dao'
 
     current_post: ->
         Docs.findOne
@@ -189,8 +189,8 @@ Template.home.helpers
             
     home_items: ->
         match = {
-            model:'post'
-            app:'dao'
+            # model:'post'
+            # app:'dao'
         }
         # if picked_tags?.array().length > 0
         match.tags = $in:picked_tags.array()
