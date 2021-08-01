@@ -70,9 +70,9 @@ if Meteor.isClient
     Template.comments.helpers
         doc_comments: ->
             parent = Docs.findOne Template.currentData()._id
-            Docs.find
-                parent_id:parent._id
-                model:'comment'
+            # Docs.find
+            #     parent_id:parent._id
+            #     model:'comment'
     Template.comments.events
         'keyup .add_comment': (e,t)->
             # console.log Template.currentData()
@@ -82,11 +82,14 @@ if Meteor.isClient
                 # parent = Docs.findOne Router.current().params.doc_id
                 comment = t.$('.add_comment').val()
                 console.log parent
-                Docs.insert
-                    parent_id: parent._id
-                    model:'comment'
-                    # parent_model:parent.model
-                    body:comment
+                Docs.update @_id,
+                    $addToSet:
+                        tags: comment
+                # Docs.insert
+                #     parent_id: parent._id
+                #     model:'comment'
+                #     # parent_model:parent.model
+                #     body:comment
                 t.$('.add_comment').val('')
 
         'click .remove_comment': ->
