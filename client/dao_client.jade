@@ -117,8 +117,8 @@ template(name='home_item')
     //             +boolean_edit key='archived' label='archived' icon='archive' direct=true
     // else
     // .ui.fluid.card(class=card_class)
-    .ui.fluid.item.smallsroll
-        span
+    .ui.fluid.card.smallsroll
+        span.image
             if image_url
                 +image_link_view key='image_url' direct=true
             else if image_id
@@ -165,9 +165,9 @@ template(name='home_item')
                     +image_edit key='image_id' label='image' icon='image'
                 .eight.wide.column
                     +html_edit key='body' label='body' direct=true
-                    // .ui.red.large.icon.button.delete_post(title='delete')
-                    //     i.remove.icon   
-                    //     // | delete
+                    .ui.red.large.icon.button.delete_post(title='delete')
+                        i.remove.icon   
+                        // | delete
                 
                 
 
