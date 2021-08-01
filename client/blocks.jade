@@ -51,26 +51,26 @@ template(name='bookmark_button')
         //-     +user_info
 
 template(name='comments')
-    .ui.grey.header
-        i.chat.outline.icon
-        |comments
-    div
+    // .ui.grey.header
+    //     i.chat.outline.icon
+    //     |comments
+    // div
     if currentUser
         .ui.fluid.icon.large.input
-            i.plus.icon
-            input.add_comment(model='text' placeholder='add')
+            i.large.chat.outline.icon
+            input.add_comment(model='text' placeholder='add comment')
     .ui.comments
         each doc_comments
             .comment
                 .content
                     .ui.header #{body}
                     .meta #{when}
-                        |by 
-                        a(href="/user/#{author.username}") #{author.first_name} #{author.last_name}
-                        if currentUser
-                            +voting_small
-                            if can_edit
-                                +remove_button
+                    //     |by 
+                    //     a(href="/user/#{author.username}") #{author.first_name} #{author.last_name}
+                    //     // if currentUser
+                    //     //     +voting_small
+                    //     //     if can_edit
+                    //     //         +remove_button
                                 
                                 
 template(name='reviews')
