@@ -202,8 +202,8 @@ Template.unpick_tag.helpers
         # console.log @
         
         match = {}
-        match.app = 'dao'
-        match.model = 'post'
+        # match.app = 'dao'
+        # match.model = 'post'
         match.title = @valueOf()
         found = 
             Docs.findOne match

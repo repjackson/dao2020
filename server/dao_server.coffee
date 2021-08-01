@@ -38,7 +38,7 @@ Meteor.publish 'post_facets', (
     self = @
     match = {}
     # match = {app:'dao'}
-    # match.model = 'post'
+    match.model = 'post'
     if picked_tags.length > 0 then match.tags = $all:picked_tags 
 
     if title_filter and title_filter.length > 1
@@ -56,7 +56,7 @@ Meteor.publish 'post_facets', (
         { $match: count: $lt: result_count }
         # { $match: _id: {$regex:"#{product_query}", $options: 'i'} }
         { $sort: count: -1, _id: 1 }
-        { $limit: 42 }
+        { $limit: 100 }
         { $project: _id: 0, title: '$_id', count: 1 }
     ], {
         allowDiskUse: true
@@ -133,7 +133,7 @@ Meteor.publish 'post_docs', (
     self = @
     match = {}
     # match = {app:'dao'}
-    # match.model = 'post'
+    match.model = 'post'
     # match.group_id = Meteor.user().current_group_id
     if title_filter and title_filter.length > 1
         match.title = {$regex:title_filter, $options:'i'}
